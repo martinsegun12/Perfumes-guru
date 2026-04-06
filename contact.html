@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | PerfumeGuru</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #FFFFFF; color: #1A1A1A; }
+        nav { position: fixed; top: 0; left: 0; right: 0; padding: 24px 60px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); transition: all 0.4s; }
+        nav.scrolled { padding: 16px 60px; box-shadow: 0 2px 20px rgba(0,0,0,0.05); }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; letter-spacing: 2px; }
+        .logo span { color: #D4AF37; }
+        .nav-links { display: flex; gap: 48px; list-style: none; }
+        .nav-links a { text-decoration: none; color: #1A1A1A; font-size: 14px; font-weight: 500; letter-spacing: 1px; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #D4AF37; }
+        .nav-icons { display: flex; gap: 24px; align-items: center; }
+        .cart-count { position: absolute; top: -8px; right: -12px; background: #D4AF37; color: white; font-size: 10px; font-weight: 600; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .mobile-menu { display: none; font-size: 24px; cursor: pointer; }
+        
+        .contact-header { padding: 140px 8% 60px; background: linear-gradient(135deg, #FAFAFA 0%, #FFFFFF 100%); text-align: center; }
+        .contact-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 500; margin-bottom: 16px; }
+        
+        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 0 8% 100px; }
+        .contact-info { background: #FAFAFA; border-radius: 24px; padding: 40px; }
+        .contact-info h3 { font-size: 24px; margin-bottom: 24px; font-family: 'Cormorant Garamond', serif; }
+        .info-item { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+        .info-item i { width: 40px; height: 40px; background: #D4AF37; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #1A1A1A; }
+        .contact-form { background: white; border-radius: 24px; padding: 40px; border: 1px solid #eee; }
+        .form-group { margin-bottom: 20px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 14px 18px; border: 1px solid #eee; border-radius: 12px; font-family: inherit; }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .submit-btn { background: #D4AF37; color: #1A1A1A; border: none; padding: 14px 32px; border-radius: 40px; font-weight: 600; cursor: pointer; width: 100%; }
+        
+        .faq-section { padding: 0 8% 100px; background: white; }
+        .faq-grid { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid #eee; padding: 24px 0; }
+        .faq-question { display: flex; justify-content: space-between; cursor: pointer; font-weight: 600; font-size: 18px; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s; color: #666; line-height: 1.8; }
+        .faq-item.active .faq-answer { max-height: 200px; padding-top: 16px; }
+        
+        .map-section { padding: 0 8% 100px; }
+        .map-placeholder { background: #FAFAFA; border-radius: 24px; height: 400px; display: flex; align-items: center; justify-content: center; color: #999; border: 1px solid #eee; }
+        
+        footer { background: #1A1A1A; color: #999; padding: 60px 8% 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: #D4AF37; margin-bottom: 20px; }
+        .footer-col a { color: #999; text-decoration: none; display: block; margin-bottom: 10px; }
+        .footer-col a:hover { color: #D4AF37; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid #333; font-size: 12px; }
+        
+        @media (max-width: 900px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .mobile-menu { display: block; }
+            .contact-container { grid-template-columns: 1fr; padding: 0 5% 60px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="logo">Perfume<span>Guru</span></div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <div class="nav-icons">
+        <a href="cart.html"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCountNav">0</span></a>
+        <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+    </div>
+</nav>
+
+<div class="contact-header">
+    <h1>Get in Touch</h1>
+    <p>We're here to help you find your perfect fragrance</p>
+</div>
+
+<div class="contact-container">
+    <div class="contact-info">
+        <h3>Contact Information</h3>
+        <div class="info-item"><i class="fab fa-whatsapp"></i><div><strong>WhatsApp</strong><br>0707 878 7237</div></div>
+        <div class="info-item"><i class="far fa-envelope"></i><div><strong>Email</strong><br>d@perfumeguru.ng</div></div>
+        <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><strong>Location</strong><br>Lagos, Nigeria</div></div>
+        <div class="info-item"><i class="far fa-clock"></i><div><strong>Response Time</strong><br>Within 30 minutes on WhatsApp</div></div>
+        <a href="https://wa.me/2347078787237" class="btn-primary" style="display: inline-block; margin-top: 20px; background: #D4AF37; color: #1A1A1A; padding: 12px 24px; border-radius: 40px; text-decoration: none; font-weight: 600;">Chat on WhatsApp →</a>
+    </div>
+    <div class="contact-form">
+        <h3>Send us a Message</h3>
+        <form id="contactForm">
+            <div class="form-group"><input type="text" id="contactName" placeholder="Your Name" required></div>
+            <div class="form-group"><input type="email" id="contactEmail" placeholder="Your Email" required></div>
+            <div class="form-group"><input type="tel" id="contactPhone" placeholder="WhatsApp Number"></div>
+            <div class="form-group"><textarea id="contactMessage" placeholder="Tell us about the fragrance you're looking for..." required></textarea></div>
+            <button type="submit" class="submit-btn">Send Message →</button>
+        </form>
+        <div id="formMessage" style="margin-top: 16px; text-align: center;"></div>
+    </div>
+</div>
+
+<div class="faq-section">
+    <h2 class="section-title" style="text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 48px; margin-bottom: 48px;">Frequently Asked Questions</h2>
+    <div class="faq-grid">
+        <div class="faq-item"><div class="faq-question">Do you accept payment on delivery? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">No, we don't offer payment on delivery at the moment. However, pick-up options are available for customers who prefer to pay in person.</div></div>
+        <div class="faq-item"><div class="faq-question">How long do your perfumes last? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Our perfumes are long-lasting, with an average projection of 8–12 hours, depending on the perfume type and your skin chemistry. For best results, apply on pulse points and clothes.</div></div>
+        <div class="faq-item"><div class="faq-question">Do you deliver outside Lagos? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Yes, we deliver nationwide across Nigeria. Delivery within Lagos is same-day or next-day, while outside Lagos takes 3–5 working days.</div></div>
+        <div class="faq-item"><div class="faq-question">Are your products authentic? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">100% authentic! We source directly from verified suppliers. No fakes, guaranteed.</div></div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col"><h4>PerfumeGuru</h4><p>Luxury fragrances for the discerning individual.</p><div class="social-links"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-tiktok"></i></a><a href="https://wa.me/2347078787237"><i class="fab fa-whatsapp"></i></a></div></div>
+        <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>Contact</h4><p><i class="fab fa-whatsapp"></i> 0707 878 7237</p><p><i class="far fa-envelope"></i> d@perfumeguru.ng</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 PerfumeGuru. All rights reserved.</p></div>
+</footer>
+
+<script>
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const total = cart.reduce((sum, i) => sum + i.quantity, 0);
+        document.querySelectorAll('.cart-count').forEach(el => el.textContent = total);
+    }
+    updateCartCount();
+    
+    window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
+    
+    document.querySelectorAll('.faq-question').forEach(q => { q.addEventListener('click', () => q.parentElement.classList.toggle('active')); });
+    
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('contactName').value;
+        const email = document.getElementById('contactEmail').value;
+        const phone = document.getElementById('contactPhone').value;
+        const message = document.getElementById('contactMessage').value;
+        const whatsappMsg = `Hello PerfumeGuru!%0A%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${message}`;
+        window.open(`https://wa.me/2347078787237?text=${whatsappMsg}`, '_blank');
+        document.getElementById('formMessage').innerHTML = '<span style="color: #D4AF37;">Redirecting to WhatsApp...</span>';
+    });
+    
+    document.querySelector('.mobile-menu').addEventListener('click', () => {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '80px';
+        navLinks.style.left = '0';
+        navLinks.style.width = '100%';
+        navLinks.style.background = 'white';
+        navLinks.style.padding = '30px';
+    });
+</script>
+</body>
+</html>
