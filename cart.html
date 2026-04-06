@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | PerfumeGuru</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #FFFFFF; color: #1A1A1A; }
+        nav { position: fixed; top: 0; left: 0; right: 0; padding: 24px 60px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); transition: all 0.4s; }
+        nav.scrolled { padding: 16px 60px; box-shadow: 0 2px 20px rgba(0,0,0,0.05); }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; letter-spacing: 2px; }
+        .logo span { color: #D4AF37; }
+        .nav-links { display: flex; gap: 48px; list-style: none; }
+        .nav-links a { text-decoration: none; color: #1A1A1A; font-size: 14px; font-weight: 500; letter-spacing: 1px; transition: color 0.3s; }
+        .nav-links a:hover { color: #D4AF37; }
+        .nav-icons { display: flex; gap: 24px; align-items: center; }
+        .nav-icons a { color: #1A1A1A; font-size: 18px; position: relative; }
+        .cart-count { position: absolute; top: -8px; right: -12px; background: #D4AF37; color: white; font-size: 10px; font-weight: 600; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .mobile-menu { display: none; font-size: 24px; cursor: pointer; }
+        
+        .cart-header { padding: 140px 8% 40px; background: linear-gradient(135deg, #FAFAFA 0%, #FFFFFF 100%); text-align: center; }
+        .cart-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 500; }
+        
+        .cart-container { display: grid; grid-template-columns: 1fr 380px; gap: 60px; padding: 0 8% 100px; }
+        .cart-items { background: white; border-radius: 24px; border: 1px solid #eee; overflow: hidden; }
+        .cart-item { display: grid; grid-template-columns: 100px 1fr auto auto; gap: 20px; align-items: center; padding: 24px; border-bottom: 1px solid #eee; }
+        .cart-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; }
+        .item-details h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .item-details .price { color: #D4AF37; font-weight: 600; }
+        .quantity-selector { display: flex; align-items: center; gap: 12px; }
+        .quantity-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #eee; background: white; cursor: pointer; }
+        .remove-item { background: none; border: none; color: #d4786a; cursor: pointer; font-size: 18px; }
+        .cart-summary { background: #FAFAFA; border-radius: 24px; padding: 32px; height: fit-content; position: sticky; top: 120px; }
+        .cart-summary h3 { font-size: 20px; margin-bottom: 24px; }
+        .summary-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .summary-total { display: flex; justify-content: space-between; padding: 16px 0; font-weight: 700; font-size: 20px; }
+        .checkout-btn { width: 100%; background: #D4AF37; color: #1A1A1A; padding: 16px; border: none; border-radius: 40px; font-weight: 600; font-size: 16px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        .checkout-btn:hover { background: #C49B2A; transform: translateY(-2px); }
+        .empty-cart { text-align: center; padding: 80px; grid-column: 1/-1; }
+        .empty-cart i { font-size: 64px; color: #ddd; margin-bottom: 20px; }
+        .continue-shopping { display: inline-block; margin-top: 20px; background: #D4AF37; color: #1A1A1A; padding: 12px 32px; border-radius: 40px; text-decoration: none; font-weight: 600; }
+        
+        footer { background: #1A1A1A; color: #999; padding: 60px 8% 30px; margin-top: 60px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: #D4AF37; margin-bottom: 20px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid #333; font-size: 12px; }
+        
+        @media (max-width: 900px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .mobile-menu { display: block; }
+            .cart-container { grid-template-columns: 1fr; padding: 0 5% 60px; }
+            .cart-item { grid-template-columns: 1fr; text-align: center; }
+            .cart-item img { margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="logo">Perfume<span>Guru</span></div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-icons">
+        <a href="cart.html"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCountNav">0</span></a>
+        <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+    </div>
+</nav>
+
+<div class="cart-header"><h1>Your Shopping Bag</h1></div>
+<div class="cart-container" id="cartContainer"></div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col"><h4>PerfumeGuru</h4><p>Luxury fragrances for the discerning individual.</p></div>
+        <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>Contact</h4><p><i class="fab fa-whatsapp"></i> 0707 878 7237</p><p><i class="far fa-envelope"></i> d@perfumeguru.ng</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 PerfumeGuru. All rights reserved.</p></div>
+</footer>
+
+<script>
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const total = cart.reduce((sum, i) => sum + i.quantity, 0);
+        document.querySelectorAll('.cart-count').forEach(el => el.textContent = total);
+    }
+    
+    function renderCart() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const container = document.getElementById('cartContainer');
+        if (cart.length === 0) {
+            container.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-bag"></i><h3>Your bag is empty</h3><p>Discover our luxury fragrances and find your signature scent.</p><a href="shop.html" class="continue-shopping">Continue Shopping →</a></div>`;
+            updateCartCount();
+            return;
+        }
+        let subtotal = 0;
+        let itemsHtml = '';
+        cart.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+            itemsHtml += `<div class="cart-item"><img src="${item.image || 'https://via.placeholder.com/80x80?text=Perfume'}" alt="${item.name}"><div class="item-details"><h3>${item.name}</h3><div class="price">₦${item.price.toLocaleString()}</div></div><div class="quantity-selector"><button class="quantity-btn" data-index="${index}" data-delta="-1">-</button><span>${item.quantity}</span><button class="quantity-btn" data-index="${index}" data-delta="1">+</button></div><button class="remove-item" data-index="${index}"><i class="fas fa-trash-alt"></i></button></div>`;
+        });
+        const shipping = subtotal > 50000 ? 0 : 3000;
+        const total = subtotal + shipping;
+        container.innerHTML = `<div class="cart-items">${itemsHtml}</div><div class="cart-summary"><h3>Order Summary</h3><div class="summary-row"><span>Subtotal</span><span>₦${subtotal.toLocaleString()}</span></div><div class="summary-row"><span>Shipping</span><span>${shipping === 0 ? 'FREE' : `₦${shipping.toLocaleString()}`}</span></div><div class="summary-total"><span>Total</span><span>₦${total.toLocaleString()}</span></div><button class="checkout-btn" id="checkoutBtn">Proceed to Checkout →</button><a href="shop.html" style="display: block; text-align: center; margin-top: 16px; color: #D4AF37; text-decoration: none;">Continue Shopping</a></div>`;
+        
+        document.querySelectorAll('.quantity-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const index = parseInt(btn.dataset.index);
+                const delta = parseInt(btn.dataset.delta);
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                if (cart[index]) { cart[index].quantity += delta; if (cart[index].quantity <= 0) cart.splice(index, 1); localStorage.setItem('cart', JSON.stringify(cart)); renderCart(); updateCartCount(); }
+            });
+        });
+        document.querySelectorAll('.remove-item').forEach(btn => {
+            btn.addEventListener('click', () => { let cart = JSON.parse(localStorage.getItem('cart')) || []; cart.splice(parseInt(btn.dataset.index), 1); localStorage.setItem('cart', JSON.stringify(cart)); renderCart(); updateCartCount(); });
+        });
+        document.getElementById('checkoutBtn')?.addEventListener('click', () => {
+            let message = "🛍️ *PerfumeGuru Order*\n\n";
+            cart.forEach(item => { message += `✨ ${item.name} x${item.quantity} = ₦${(item.price * item.quantity).toLocaleString()}\n`; });
+            message += `\n📦 Subtotal: ₦${subtotal.toLocaleString()}\n🚚 Shipping: ${shipping === 0 ? 'FREE' : `₦${shipping.toLocaleString()}`}\n💰 Total: ₦${total.toLocaleString()}\n\nPlease confirm my order and provide payment details.`;
+            window.open(`https://wa.me/2347078787237?text=${encodeURIComponent(message)}`, '_blank');
+        });
+        updateCartCount();
+    }
+    
+    window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
+    renderCart();
+    
+    document.querySelector('.mobile-menu')?.addEventListener('click', () => {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '80px';
+        navLinks.style.left = '0';
+        navLinks.style.width = '100%';
+        navLinks.style.background = 'white';
+        navLinks.style.padding = '30px';
+    });
+</script>
+</body>
+</html>
